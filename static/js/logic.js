@@ -15,40 +15,34 @@ L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 // Assemble API query URL
 
 // Grab the data with d3
-d3.json("/static/data/nyc_gym_DF.json", function(Data) {
+d3.json("/static/data/temp.json", function(Data) {
   console.log(Data);
+
+   console.log('Edwin');
+
 
 
   // Create a new marker cluster group
+  
   var markers = L.markerClusterGroup();
-    // L.marker(40.852806,-73.912127).addTo(map);
-    markers.addLayer(L.marker(40.852806,-73.912127)
-           .bindPopup('Edwin'.descriptor));
 
-             // Add our marker cluster layer to the map
+
+    for (var i = 0; i < Data.length; i++) {
+
+    // Set the data location property to a variable
+    var Location = Data[i].Location;
+      console.log(i);
+      
+    // Check for location property
+    
+      // Add a new marker to the cluster group and bind a pop-up
+      markers.addLayer(L.marker([Data[i].Lat, Data[i].Lng])
+        .bindPopup(Data[i].Neighborhood));
+    
+
+  }
+
+  // Add our marker cluster layer to the map
   myMap.addLayer(markers);
 
-
 });
-
-
-//   // Loop through data
-//   for (var i = 0; i < Data.length; i++) {
-
-//     // Set the data location property to a variable
-//     var Location = Data[i].Location;
-
-//     // Check for location property
-//     if (Location) {
-
-//       // Add a new marker to the cluster group and bind a pop-up
-//       markers.addLayer(L.marker([Location.coordinates[1], Location.coordinates[0]])
-//         .bindPopup(Data[i].descriptor));
-//     }
-
-//   }
-
-//   // Add our marker cluster layer to the map
-//   myMap.addLayer(markers);
-
-// });
