@@ -15,7 +15,7 @@ L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 // Assemble API query URL
 
 // Grab the data with d3
-d3.json("/static/data/temp.json", function(Data) {
+d3.json("static/data/temp.json", function(Data) {
   console.log(Data);
    
   // Create a new marker cluster group
