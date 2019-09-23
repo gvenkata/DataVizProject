@@ -33,7 +33,7 @@ d3.json("/static/data/temp.json", function(Data) {
     
       // Add a new marker to the cluster group and bind a pop-up
       markers.addLayer(L.marker([Data[i].Lat, Data[i].Lng])
-        .bindPopup(Data[i].est.toString()));
+        .bindPopup(Data[i].Zip.toString()));
                           
   }
 
