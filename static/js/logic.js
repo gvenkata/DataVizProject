@@ -27,7 +27,7 @@ d3.json("/static/data/temp.json", function(Data) {
 
     // Set the data location property to a variable
     var Location = Data[i].Location;
-      console.log(i);
+      // console.log(i);
       
     // Check for location property
     
