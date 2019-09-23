@@ -17,11 +17,7 @@ L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 // Grab the data with d3
 d3.json("/static/data/temp.json", function(Data) {
   console.log(Data);
-
-   console.log('Edwin');
-
-
-
+   
   // Create a new marker cluster group
   
   var markers = L.markerClusterGroup();
@@ -37,9 +33,8 @@ d3.json("/static/data/temp.json", function(Data) {
     
       // Add a new marker to the cluster group and bind a pop-up
       markers.addLayer(L.marker([Data[i].Lat, Data[i].Lng])
-        .bindPopup(Data[i].Neighborhood));
-    
-
+        .bindPopup(Data[i].est.toString()));
+                          
   }
 
   // Add our marker cluster layer to the map
