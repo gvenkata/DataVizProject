@@ -55,7 +55,7 @@ d3.json("/static/data/temp.json", function(Cluster_Data) {
   geojson = L.choropleth(Data, {
 
     // Define what  property in the features to use
-    valueProperty: "income",
+    valueProperty: "pop",
 
     // Set color scale   - update collor   to red 
     scale: ["#ffffb2", "#b10026"],
