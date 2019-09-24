@@ -3,7 +3,7 @@
 var lightmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token={accessToken}", {
     attribution: "Map data &copy; <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"http://mapbox.com\">Mapbox</a>",
     maxZoom: 18,
-    id: "mapbox.light",
+    id: "mapbox.dark",
     accessToken: API_KEY
   });
 
@@ -46,12 +46,36 @@ d3.json("/static/data/temp.json", function(Cluster_Data) {
   }
 
 
-
-
-
-
-  // Create a new choropleth layer
+  // Create a new choropleth layer  -  Income 
   geojson = L.choropleth(Data, {
+
+    // Define what  property in the features to use
+    valueProperty: "income",
+
+    // Set color scale   - update collor   to red 
+    scale: ["#ffffb2", "#b10026"],
+
+    // Number of breaks in step range
+    steps: 15,
+
+    // q for quartile, e for equidistant, k for k-means
+    mode: "q",
+    style: {
+      // Border color
+      color: "#fff",
+      weight: 3,
+      fillOpacity: 0.8
+    },
+
+    // Binding a pop-up to each layer
+    onEachFeature: function(feature, layer) {
+      layer.bindPopup(feature.properties.LOCALNAME + ", " + feature.properties.State + "<br>Median Household Income:<br>" +
+        "$" + feature.properties.income);
+    }
+  });
+
+  // Create a new choropleth layer - Population
+  geojson_pop = L.choropleth(Data, {
 
     // Define what  property in the features to use
     valueProperty: "pop",
@@ -60,33 +84,34 @@ d3.json("/static/data/temp.json", function(Cluster_Data) {
     scale: ["#ffffb2", "#b10026"],
 
     // Number of breaks in step range
-    steps: 10,
+    steps: 15,
 
     // q for quartile, e for equidistant, k for k-means
     mode: "q",
     style: {
       // Border color
       color: "#fff",
-      weight: 1,
+      weight: 3,
       fillOpacity: 0.8
     },
 
     // Binding a pop-up to each layer
     onEachFeature: function(feature, layer) {
-      layer.bindPopup(feature.properties.LOCALNAME + ", " + feature.properties.State + "<br>Median Household Income:<br>" +
-        "$" + feature.properties.MHI);
+      layer.bindPopup(feature.properties.income + ", " + feature.properties.State + "<br>Median Household Income:<br>" +
+        "$" + feature.properties.pop);
     }
   });
 // keyvLUE AND MAP
   var overlayMaps = {
-    "Chlorpleth": geojson, 
+    Population_Density : geojson_pop,
+    "Income": geojson, 
     "Cluster":markers
   };
 
 
   var map = L.map("map", {
-    center: [40.7128, -74.0059],
-    zoom: 12,
+    center: [40.6958, -73.9171],
+    zoom: 11.49,
     layers: [lightmap, geojson]
   });
 
@@ -96,7 +121,7 @@ L.control.layers(baseMaps, overlayMaps, {
 }).addTo(map);
 
   // Set up the legend
-  var legend = L.control({ position: "bottomright" });
+  var legend = L.control({ position: "topleft" });
   legend.onAdd = function() {
     var div = L.DomUtil.create("div", "info legend");
     var limits = geojson.options.limits;
@@ -121,6 +146,6 @@ L.control.layers(baseMaps, overlayMaps, {
   };
 
   // Adding legend to the map
-  legend.addTo(myMap);
+  legend.addTo(map);
   });
  });
