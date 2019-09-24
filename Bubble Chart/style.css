@@ -39,6 +39,13 @@
   text-anchor: middle;
 }
 
+.BoroughText {
+  font-family: sans-serif;
+  font-weight: bold;
+  fill: rgb(33, 38, 110);
+  text-anchor: center;
+}
+
 
 .tooltip3 {
   fill:#7bc2a7
