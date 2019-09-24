@@ -84,7 +84,7 @@ d3.json("/static/data/temp.json", function(Cluster_Data) {
     scale: ["#ffffb2", "#b10026"],
 
     // Number of breaks in step range
-    steps: 15,
+    steps: 10,
 
     // q for quartile, e for equidistant, k for k-means
     mode: "q",
