@@ -23,7 +23,7 @@ d3.json("geojson_NYCZip.geojson", function(Data) {
     console.log(Data);
 
     // Grab the data with d3
-d3.json("temp.json", function(Cluster_Data) {
+d3.json("/static/data/temp.json", function(Cluster_Data) {
   console.log(Cluster_Data);
    
   // Create a new marker cluster group
@@ -69,12 +69,12 @@ d3.json("temp.json", function(Cluster_Data) {
 
     // Binding a pop-up to each layer
     onEachFeature: function(feature, layer) {
-      layer.bindPopup(feature.properties.income + ", " + feature.properties.State + "<br>Median Household Income:<br>" +
+      layer.bindPopup(feature.properties.LOCALNAME + ", " + feature.properties.State + "<br>Median Household Income:<br>" +
         "$" + feature.properties.income);
     }
   });
 
-  // Create a new choropleth layer -                          Population
+  // Create a new choropleth layer - Population
   geojson_pop = L.choropleth(Data, {
 
     // Define what  property in the features to use
@@ -84,7 +84,7 @@ d3.json("temp.json", function(Cluster_Data) {
     scale: ["#ffffb2", "#b10026"],
 
     // Number of breaks in step range
-    steps: 5,
+    steps: 10,
 
     // q for quartile, e for equidistant, k for k-means
     mode: "q",
@@ -97,8 +97,8 @@ d3.json("temp.json", function(Cluster_Data) {
 
     // Binding a pop-up to each layer
     onEachFeature: function(feature, layer) {
-      layer.bindPopup(feature.properties.PO_NAME + ", " +'Pop_Size '+ feature.properties.pop + "<center>Median Household Income:<center>" +
-        "$" + feature.properties.income);
+      layer.bindPopup(feature.properties.income + ", " + feature.properties.State + "<br>Median Household Income:<br>" +
+        "$" + feature.properties.pop);
     }
   });
 // keyvLUE AND MAP
@@ -129,7 +129,7 @@ L.control.layers(baseMaps, overlayMaps, {
     var labels = [];
 
     // Add min & max
-    var legendInfo = "<h1>DENSITY</h1>" +
+    var legendInfo = "<h1>Median Income</h1>" +
       "<div class=\"labels\">" +
         "<div class=\"min\">" + limits[0] + "</div>" +
         "<div class=\"max\">" + limits[limits.length - 1] + "</div>" +
