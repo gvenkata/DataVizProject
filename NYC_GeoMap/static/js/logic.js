@@ -63,15 +63,15 @@ d3.json("temp.json", function(Cluster_Data) {
     style: {
       // Border color
       color: "#fff",
-      weight: 3,
+      weight: 1,
       fillOpacity: 0.8
     },
 
     // Binding a pop-up to each layer
     onEachFeature: function(feature, layer) {
-      layer.bindPopup(feature.properties.income + ", " + feature.properties.State + "<br>Median Household Income:<br>" +
-        "$" + feature.properties.income);
-    }
+      layer.bindPopup(feature.properties.PO_NAME + ", " +'Pop_Size '+ feature.properties.pop + "<center>Median Household Income:<center>" +
+      "$" + feature.properties.income);
+  }
   });
 
   // Create a new choropleth layer -                          Population
@@ -91,7 +91,7 @@ d3.json("temp.json", function(Cluster_Data) {
     style: {
       // Border color
       color: "#fff",
-      weight: 3,
+      weight: 1,
       fillOpacity: 0.8
     },
 
