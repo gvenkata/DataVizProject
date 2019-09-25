@@ -1,22 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>Rose Chart</title>	
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js"></script>
-			<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-	</head>
- <body>
-	
-	<div id="myDiv" style="width: 480px; height: 400px;"><!-- Plotly chart will be drawn inside this DIV --></div>
-	<script>
-	  <!-- JAVASCRIPT CODE GOES HERE -->
-	</script>
+<html>
+  <head>
+    <title>DataViz</title>
+    <script src="https://cdn.anychart.com/releases/staging/js/anychart-base.min.js?hcode=be5162d915534272a57d0bb781d27f2b"></script>
+    <script src="https://cdn.anychart.com/releases/staging/js/anychart-ui.min.js?hcode=be5162d915534272a57d0bb781d27f2b"></script>
+    <script src="https://cdn.anychart.com/releases/staging/js/anychart-exports.min.js?hcode=be5162d915534272a57d0bb781d27f2b"></script>
+    <script src="https://cdn.anychart.com/releases/staging/js/anychart-polar.min.js?hcode=be5162d915534272a57d0bb781d27f2b"></script>
+    <link href="https://cdn.anychart.com/releases/staging/css/anychart-ui.min.css?hcode=be5162d915534272a57d0bb781d27f2b" type="text/css" rel="stylesheet">
+    <link href="https://cdn.anychart.com/releases/staging/fonts/css/anychart-font.min.css?hcode=be5162d915534272a57d0bb781d27f2b" type="text/css" rel="stylesheet">
+    <style type="text/css">
+  html, body, #container {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+  }
+  </style>
+  </head>
+  <body>
+    <div id="container"></div>
+    <script>
+  anychart.onDocumentReady(function () {
+      // create polar chart
+      var chart = anychart.polar();
+  
+      // create data set on our data
+      chartData = {
+          title: 'Race Population by Borough',
+          header: ['#', 'White', 'Black', 'Asian', 'Latino', 'Other'],
+          rows: [
+              ['Bronx', 111315, 246380, 38573, 616177, 18228],
+              ['Brooklyn', 931626, 692661, 298696, 438718, 57588],
+              ['Manhattan', 763337, 204792, 194315, 424028, 45101],
+              ['Queens', 521568, 288056, 515665, 559349, 64411],
+              ['Staten Island', 263970, 33682, 32942, 69226, 8013]
+              
+              
+          ]
+      };
+  
+      // sort data by X
+      chart.sortPointsByX(true)
+              // set series type
+              .defaultSeriesType('column')
+              // disable y-axis
+              .yAxis(false)
+              // set x-scale
+              .xScale('ordinal');
+  
+      // set chart data
+      chart.data(chartData);
+  
+      // set title margin
+      chart.title().margin().bottom(20);
+  
+      // set stack mod
+      chart.yScale().stackMode('value');
+  
+      // set tooltip settings
+      // chart.tooltip()
+      //  .displayMode('union');
+  
+      // set chart container id
+      chart.container('container');
+      // initiate chart drawing
+      chart.draw();
+  });
+  </script>
   </body>
-
-	<body>
-		<div class="chart">
-		</div>
-		<script type="text/javascript" src="RoseChart.js"></script>
-  </body>
-</html>
+  </html>
+                  
