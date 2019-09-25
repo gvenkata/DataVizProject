@@ -23,7 +23,7 @@ d3.json("geojson_NYCZip.geojson", function(Data) {
     console.log(Data);
 
     // Grab the data with d3
-d3.json("/static/data/temp.json", function(Cluster_Data) {
+d3.json("temp.json", function(Cluster_Data) {
   console.log(Cluster_Data);
    
   // Create a new marker cluster group
@@ -84,7 +84,7 @@ d3.json("/static/data/temp.json", function(Cluster_Data) {
     scale: ["#ffffb2", "#b10026"],
 
     // Number of breaks in step range
-    steps: 10,
+    steps: 5,
 
     // q for quartile, e for equidistant, k for k-means
     mode: "q",
